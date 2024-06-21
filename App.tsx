@@ -1,6 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
 import { useCallback } from 'react';
 import MainButton from './components/mainButton';
@@ -11,18 +10,7 @@ SplashScreen.preventAutoHideAsync();
 export default function App() {
 
   const [fontsLoaded, fontError] = useFonts({
-    "coop-Black": require("./assets/fonts/Cooper-Black.ttf"),
-    "coop-BlackItalic": require("./assets/fonts/Cooper-BlackItalic.ttf"),
-    "coop-Bold": require("./assets/fonts/Cooper-Bold.ttf"),
-    "coop-BoldItalic": require("./assets/fonts/Cooper-BoldItalic.ttf"),
-    "coop-ExtraBold": require("./assets/fonts/Cooper-ExtraBold.ttf"),
-    "coop-ExtraBoldItalic": require("./assets/fonts/Cooper-ExtraBoldItalic.ttf"),
-    "coop-Italic": require("./assets/fonts/Cooper-Italic.ttf"),
-    "coop-Medium": require("./assets/fonts/Cooper-Medium.ttf"),
-    "coop-MediumItalic": require("./assets/fonts/Cooper-MediumItalic.ttf"),
-    "coop-Regular": require("./assets/fonts/Cooper-Regular.ttf"),
-    "coop-SemiBold": require("./assets/fonts/Cooper-SemiBold.ttf"),
-    "coop-SemiBoldItalic": require("./assets/fonts/Cooper-SemiBoldItalic.ttf"),
+    "LilitaOne-Regular": require("./assets/fonts/LilitaOne-Regular.ttf"),
   });
 
   const onLayoutRootView = useCallback(async () => {
@@ -36,20 +24,41 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
-      <Text style={{ fontFamily: 'coop-SemiBoldItalic', fontSize: 30, lineHeight:35 }} >Memory master</Text>
-      <MainButton color='#01FB1A' dark='#076511' fontFamily='coop-Black' fontsize={30} text='SINGLE GAME' onPress={() => console.log("hello")} textColor='#ffffff'></MainButton>
-    </View>
+    <ImageBackground source={require("./assets/images/background_yellow.png")} resizeMode='cover' style={styles.container} onLayout={onLayoutRootView}>
+      
+      <View style={styles.images}>
+        <Image style={[styles.backCard, styles.secondCard]} source={require("./assets/images/backCard.png")} />
+        <Image style={styles.backCard} source={require("./assets/images/backCard.png")} />
+      </View>
+
+      <View style={styles.buttons}>
+        <MainButton color='#01FB1A' dark='#076511' fontFamily='LilitaOne-Regular' fontsize={30} text='SINGLE GAME' onPress={() => console.log("hello")} textColor='#ffffff'></MainButton>
+      </View>
+    </ImageBackground>
+
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+
   },
+  images: {
+    marginTop: 100,
+  },
+  backCard: {
+    height: 300,
+    resizeMode: "contain"
+  },
+  secondCard: {
+    position:"absolute",
+    transform:[{rotate:"-15deg"}]
+  },
+  buttons: {
+    marginTop:50,
+  }
 });
 
 
